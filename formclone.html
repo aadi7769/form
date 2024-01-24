@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+   <link href="formclone.css" rel="stylesheet"> 
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">  
+</head>
+<body>
+ <div class="hero">
+    <div class="form-group8">
+        <input type="button" value="adduser" id="addUserButton" class="add-user-button">
+    </div>
+<div id="modal">
+    <div class="container">
+       
+    <form  id="myForm"  >
+        <span class="close1" onclick="closeEditModal()">&times;</span>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="enter your name" >
+            <span class="err" id="nameerror"></span>
+        </div>
+         
+
+         <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="E-mail address" required>
+            <span class="err" id="emailerror"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Must be 10 digits" required>
+            <span  class="err" id="phoneerror"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="password must be 8characters" required>
+            <span class="err"id="passworderror"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirmpassword" name="confirm-password" placeholder="password must be 8characters" required>
+            <span class="err" id="confirmpassworderror"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" placeholder="how old are you" max="" >
+            <span class="err" id="doberror"></span>
+        </div>
+         <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" id="age" name="age" placeholder="you will get the age here">
+            <span class="err" id="ageerror"></span>
+         </div>
+
+         <div class="formhae">
+            <label for="myCheckbox">Hobbies:       </label>
+            <input type="checkbox" id="swimming" name="myCheckbox" value="swimming">
+            <label for="gender" > Swimming </label>
+            <input type="checkbox" id="cricket" name="myCheckbox" value="cricket">
+            <label for="gender" >Cricket </label>
+            <input type="checkbox" id="football" name="myCheckbox" value="football">
+            <label for="gender" >Football </label>
+            <br>
+            <span class="err" id="checkerror"></span>
+         </div>
+
+
+        <div class="form-group1">
+            <label for="gender" >Gender: </label>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="male">Female</label>
+            <input type="radio" id="others" name="gender" value="Others" required>
+            <label for="male">Others</label>
+            <br>
+            <span class="err" id="radioerror"></span>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="courses">Select Course:</label>
+            <select id="courses" name="courses" multiple>
+                <option value="Btech">Btech</option>
+                <option value="Bcom">Bcom</option>
+                <option value="Bpharmacy">B.Pharmacy</option>
+                <option value="Barch">B.Arch</option>
+                <option value="Mtech">Mtech</option>
+                <option value="Mcom">Mcom</option>
+                <option value="M.Pharmacy">M.Pharmacy</option>
+                <option value="M.Arch">M Arch</option>
+            </select>
+            <span class="err" id="courseserror"></span>
+        </div>
+        
+         <div class="form-group">
+            <label for="startdate">Course start Date:</label>
+            <input type="date" id="startdate" name="startdate" min="" max="" onchange=" fun1()">
+            <span  class="err"    id="startdateerror"></span>
+        </div>
+        <div class="form-group">
+            <label for="dob">Course End Date:</label>
+            <input type="date" id="enddate" name="enddate" min="" max="" onchange="fun2()">
+            <span  class="err"   id="enddateerror"></span>
+        </div> 
+
+
+
+
+
+        <div class="form-row">
+        <div class="form-group2">
+            <input type="submit" value="Submit" id="sub" onclick="  validateForm(event)" >
+        </div>
+
+        <div class="form-group2">
+            <input type="button" value="Update" id="save" style="display: none;" disabled >
+        </div>
+        </div>
+        <br>
+    </form>
+
+   
+   
+   </div>
+</div>
+   <table class="form-group" id="real-table">
+    <thead>
+      <tr>
+        <th>select<input type="checkbox" id="deleteit" name="" value="selecttodelete" onclick="toggleAllCheckboxes()"></th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Delete Action</th>
+         <th>EDIT</th>
+      </tr>
+      </thead>
+      <tbody id="FormDataBody"></tbody>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5"> 
+                <div class="delete-buttons-container">
+                <button onclick="deleteit()" class="delete-button delete-selected-button">Delete Selected</button>
+                <button onclick="openDeleteAllConfirmationModal();" class="delete-button delete-all-button">Delete All</button>
+            </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+         <h2>Details for <span id="modalName"></span></h2>
+          <table class="form-group" id="data-table" >
+            
+            <tbody  id="tableDataModal">
+            </tbody>
+          </table> 
+          <div id="modalContent"></div>
+    </div>
+</div>
+
+
+
+   
+<div id="deleteConfirmationModal" class="modal">
+    <div class="modal-content1">
+        <span class="close" onclick="closeDeleteConfirmationModal()">&times;</span>
+        <p>Are you sure you want to delete the selected rows?</p>
+        <div class="button-container">
+            <button id="confirmDeleteButton" onclick="confirmDelete()">Yes</button>
+            <button id="cancelDeleteButton" onclick="closeDeleteConfirmationModal()">No</button>
+        </div>
+    </div>
+</div>
+
+<div id="deleteAllConfirmationModal" class="modal">
+    <div class="modal-content2">
+        <span class="close" onclick="closeDeleteAllConfirmationModal()">&times;</span>
+        <p>Are you sure you want to delete all entries?</p>
+        <button onclick="confirmDeleteAll()">Yes</button>
+        <button onclick="closeDeleteAllConfirmationModal()">No</button>
+    </div>
+</div>
+
+<div class="bubbles">
+    <img src="bubble.png">
+    <img src="bubble.png">
+    <img src="bubble.png">
+    <img src="bubble.png">
+    <img src="bubble.png">
+    <img src="bubble.png">
+    <img src="bubble.png">
+</div>
+
+
+
+
+
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+</body>
+<script src="formclone.js">
+
+
+
+ 
+
+
+</script>
+</html>
+
